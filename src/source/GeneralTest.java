@@ -10,6 +10,10 @@ public class GeneralTest extends TestCase {
 	protected void setUp() {
 		game = new Game();
 	}
+	
+	// ---- Premier sprint -----
+	
+	
 	@Test //UC 1
 	public void testInit() {
 		int initValue = game.init(2);				//Initialisation de la partie
@@ -98,6 +102,23 @@ public class GeneralTest extends TestCase {
 		assertEquals(mainDeuxieme.nbCartes(),0);	//On vérifie que le deuxième joueur a 0 carte
 	}
 	
+	// ---- Deuxième sprint -----
+	@Test //UC 2
+	public void testNbJoueurs() {
+		int nbJoueurs = 5;							//Remplacé par un scanner dans le main
+		game.init(nbJoueurs);
+		assertEquals(game.nbJoueurs(), 5);			//On vérifie qu'il y a bien 5 joueurs dans la partie
+	}
+	
+	@Test //UC 7
+	public void testEnleverJoueur() {
+		game.init(3);                               //On initialise la partie
+		game.tapis();								//Le premier joueur fait tapis
+		game.tapis();								//Le deuxième joueur fait tapis (l'un des deux perd forcément)
+		game.suivre(); 								//Le troisième suit
+		game.actualise();							//On actualise à la fin de partie
+		assertEquals(game.nbJoueurs(), 2); 			//On vérifie qu'il ne reste plus que deux joueurs
+	}
 	
 }
 

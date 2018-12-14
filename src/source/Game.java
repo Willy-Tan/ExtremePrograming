@@ -8,7 +8,7 @@ public class Game {
 	private int pot ;
 	private int joueurCourant;
 	private int miseMinimale;
-	
+	private CartesAuMilieu cartesAuMilieu;
 	
 
 	public Game() {
@@ -36,6 +36,10 @@ public class Game {
 	}
 	public int getPot () { 
 		return pot;
+	}
+	
+	public int nbJoueurs() {
+		return joueurs.size();
 	}
 	
 	public int nbJoueursActifs() {
@@ -114,4 +118,35 @@ public class Game {
 		passerAuJoueurSuivant();
 	}
 	
+	public void actualise() {
+		Joueur joueur;
+		int valeurMax = -1;
+		MainDeCartes main;
+		int valeurCourante;
+		int gagnantActuel = 0;
+		for (int i = 0; i < joueurs.size() ; i++ ) {
+			joueur =  joueurs.get(i);
+			if (joueur.getState()) {
+				main = joueur.getMain();
+				valeurCourante = main.valeur(cartesAuMilieu);
+				if(valeurCourante > valeurMax) {
+					valeurMax = valeurCourante;
+					gagnantActuel = i;
+				}
+			}
+		}
+		
+		joueur = joueurs.get(gagnantActuel);
+		joueur.addPot(pot);
+		
+		ArrayList<Joueur> joueursRestants = new ArrayList<Joueur> ();
+		for(int i=0; i<joueurs.size(); i++) {
+			joueur = joueurs.get(i);
+			if(joueur.getCash() != 0) {
+				joueursRestants.add(joueur);
+			}
+		}
+		joueurs = joueursRestants;
+		
+	}
 }

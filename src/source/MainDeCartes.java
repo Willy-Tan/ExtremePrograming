@@ -21,4 +21,9 @@ public class MainDeCartes {
 		listeCartes = new ArrayList<Carte>();
 	}
 	
+	public int valeur(CartesAuMilieu cartesAuMilieu) {
+		//On retourne 0 pour l'instant, le calcul sera implémenté plus tard
+		return 0;
+	}
+	
 }

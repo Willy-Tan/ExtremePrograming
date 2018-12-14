@@ -52,5 +52,9 @@ public class Joueur {
 		actif = false;
 	}
 	
+	public void addPot(int pot) {
+		cash += pot;
+	}
+	
 	
 }
